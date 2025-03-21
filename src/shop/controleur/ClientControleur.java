@@ -3,6 +3,8 @@ package shop.controleur;
 import shop.donnees.GestionClient;
 import shop.modele.Client;
 
+import java.sql.SQLException;
+
 public class ClientControleur {
     private GestionClient gestionClient;
 
@@ -10,8 +12,9 @@ public class ClientControleur {
         this.gestionClient = new GestionClient();
     }
 
-    public void inscrireClient(String nom, String email, String motDePasse) {
+    public int inscrireClient(String nom, String email, String motDePasse) throws SQLException {
         Client client = new Client(0, nom, email, motDePasse);
-        gestionClient.ajouterClient(client);
+        int result = gestionClient.ajouterClient(client);
+        return result;
     }
 }

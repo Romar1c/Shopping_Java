@@ -15,16 +15,32 @@ public class GestionClient {
         this.connexion = ConnexionBDD.getConnexion();
     }
 
-    public void ajouterClient(Client client) {
-        String sql = "INSERT INTO clients (nom, email, mot_de_passe) VALUES (?, ?, ?)";
-        try (PreparedStatement stmt = connexion.prepareStatement(sql)) {
-            stmt.setString(1, client.getNom());
-            stmt.setString(2, client.getEmail());
-            stmt.setString(3, client.getMotDePasse());
-            stmt.executeUpdate();
-            System.out.println("Client ajouté avec succès !");
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public int ajouterClient(Client client) throws SQLException {
+        int count = 0;
+        String sql_verif = "SELECT COUNT(*) FROM `clients` WHERE email = (?);";
+        PreparedStatement stmt_verif = connexion.prepareStatement(sql_verif);
+        stmt_verif.setString(1, client.getEmail());
+        ResultSet rs = stmt_verif.executeQuery();
+        if (rs.next()) {
+            count = rs.getInt(1);
         }
+        if(count == 0) {
+            String sql = "INSERT INTO clients (nom, email, mot_de_passe) VALUES (?, ?, ?)";
+            try (PreparedStatement stmt = connexion.prepareStatement(sql)) {
+                stmt.setString(1, client.getNom());
+                stmt.setString(2, client.getEmail());
+                stmt.setString(3, client.getMotDePasse());
+                stmt.executeUpdate();
+                System.out.println("Client ajouté avec succès !");
+                return 1;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            System.out.println("Le client n'a pas pu etre ajouter car la mail est deja utilise.");
+            return 0;
+        }
+        return 0;
     }
 }

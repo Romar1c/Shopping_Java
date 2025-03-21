@@ -5,6 +5,7 @@ import shop.controleur.ClientControleur;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class FenetreInscription extends JFrame {
     private JTextField nomField, emailField;
@@ -51,8 +52,18 @@ public class FenetreInscription extends JFrame {
         inscrireButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clientControleur.inscrireClient(nomField.getText(), emailField.getText(), new String(passwordField.getPassword()));
-                JOptionPane.showMessageDialog(null, "Client inscrit avec succès !");
+                int result = 0;
+                try {
+                    result = clientControleur.inscrireClient(nomField.getText(), emailField.getText(), new String(passwordField.getPassword()));
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                if(result == 1){
+                    JOptionPane.showMessageDialog(null, "Client inscrit avec succès !");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Le mail est deja utiliser !");
+                }
             }
         });
 
