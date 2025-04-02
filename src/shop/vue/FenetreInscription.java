@@ -60,9 +60,10 @@ public class FenetreInscription extends JFrame {
                 }
                 if(result == 1){
                     JOptionPane.showMessageDialog(null, "Client inscrit avec succès !");
+                    dispose();
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "Le mail est deja utiliser !");
+                    JOptionPane.showMessageDialog(null, "Le mail est deja utilise !");
                 }
             }
         });

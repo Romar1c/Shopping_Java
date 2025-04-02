@@ -11,6 +11,7 @@ public class FenetreConnexion extends JFrame {
     private JTextField emailField;
     private JPasswordField passwordField;
     private JButton loginButton;
+    private JButton registerButton;
     private UtilisateurControleur utilisateurControleur;
 
     public FenetreConnexion() {
@@ -28,6 +29,9 @@ public class FenetreConnexion extends JFrame {
         add(new JLabel("Mot de passe: "));
         passwordField = new JPasswordField();
         add(passwordField);
+
+        registerButton = new JButton("Creation Compte");
+        add(registerButton);
 
         loginButton = new JButton("Se connecter");
         add(loginButton);
@@ -47,6 +51,13 @@ public class FenetreConnexion extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Email ou mot de passe incorrect.", "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
+            }
+        });
+
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FenetreInscription fenetreInscription = new FenetreInscription();
             }
         });
 
