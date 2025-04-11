@@ -27,7 +27,7 @@ public class GestionArticle {
             stmt.setDouble(4, article.getPrixVrac());
             stmt.setInt(5, article.getQuantiteVrac());
             stmt.executeUpdate();
-            System.out.println("✅ Article ajouté avec succès !");
+            System.out.println("Article ajouté avec succès !");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -39,7 +39,7 @@ public class GestionArticle {
         try (PreparedStatement stmt = connexion.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
-            System.out.println("✅ Article supprimé avec succès !");
+            System.out.println("Article supprimé avec succès !");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,7 +56,7 @@ public class GestionArticle {
             stmt.setInt(5, article.getQuantiteVrac());
             stmt.setInt(6, article.getId());
             stmt.executeUpdate();
-            System.out.println("✅ Article modifié avec succès !");
+            System.out.println("Article modifié avec succès !");
         } catch (SQLException e) {
             e.printStackTrace();
         }

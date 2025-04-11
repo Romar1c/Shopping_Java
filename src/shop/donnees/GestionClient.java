@@ -25,7 +25,7 @@ public class GestionClient {
             count = rs.getInt(1);
         }
         if(count == 0) {
-            String sql = "INSERT INTO clients (nom, email, mot_de_passe) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO clients (nom, email, mot_de_passe, admin) VALUES (?, ?, ?, 0)";
             try (PreparedStatement stmt = connexion.prepareStatement(sql)) {
                 stmt.setString(1, client.getNom());
                 stmt.setString(2, client.getEmail());

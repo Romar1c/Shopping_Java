@@ -6,6 +6,8 @@ import shop.modele.Commande;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,14 +36,33 @@ public class FenetreShopping extends JFrame {
         // Tableau des articles disponibles
         modelArticles = new DefaultTableModel(new String[]{"ID", "Nom", "Marque", "Prix Unitaire"}, 0);
         tableArticles = new JTable(modelArticles);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableArticles.getModel());
+        tableArticles.setRowSorter(sorter);
         add(new JScrollPane(tableArticles), BorderLayout.WEST);
+
+        // Barre de Recherche
+        JPanel panelRecherche = new JPanel(new BorderLayout());
+        JTextField champRecherche = new JTextField();
+        panelRecherche.add(new JLabel("Recherche : "), BorderLayout.WEST);
+        panelRecherche.add(champRecherche, BorderLayout.CENTER);
+        add(panelRecherche, BorderLayout.NORTH);
+
+        champRecherche.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                rechercher(champRecherche.getText(), sorter);
+            }
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                rechercher(champRecherche.getText(), sorter);
+            }
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                rechercher(champRecherche.getText(), sorter);
+            }
+        });
 
         // Tableau du panier
         modelPanier = new DefaultTableModel(new String[]{"ID", "Nom", "Quantité", "Total"}, 0);
         tablePanier = new JTable(modelPanier);
         add(new JScrollPane(tablePanier), BorderLayout.EAST);
-
-
 
         // Panel d'actions
         JPanel panelActions = new JPanel(new GridLayout(3, 2));
@@ -100,6 +121,14 @@ public class FenetreShopping extends JFrame {
 
         rafraichirArticles();
         setVisible(true);
+    }
+
+    private static void rechercher(String texte, TableRowSorter<TableModel> sorter) {
+        if (texte.trim().length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + texte));
+        }
     }
 
     private void rafraichirArticles() {
