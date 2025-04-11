@@ -29,7 +29,7 @@ public class FenetreShopping extends JFrame {
         this.panier = new ArrayList<>();
 
         setTitle("Shopping - Client ID: " + clientId);
-        setSize(900, 600);
+        setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -40,12 +40,21 @@ public class FenetreShopping extends JFrame {
         tableArticles.setRowSorter(sorter);
         add(new JScrollPane(tableArticles), BorderLayout.WEST);
 
+        // North
+        JPanel panelNorth = new JPanel(new BorderLayout());
+
+        // Affiche commande
+        viewOrdersButton = new JButton("Voir mes Commandes");
+        panelNorth.add(viewOrdersButton, BorderLayout.EAST);
+
         // Barre de Recherche
         JPanel panelRecherche = new JPanel(new BorderLayout());
         JTextField champRecherche = new JTextField();
         panelRecherche.add(new JLabel("Recherche : "), BorderLayout.WEST);
         panelRecherche.add(champRecherche, BorderLayout.CENTER);
-        add(panelRecherche, BorderLayout.NORTH);
+
+        panelNorth.add(panelRecherche, BorderLayout.CENTER);
+        add(panelNorth, BorderLayout.NORTH);
 
         champRecherche.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             public void insertUpdate(javax.swing.event.DocumentEvent e) {
@@ -60,22 +69,35 @@ public class FenetreShopping extends JFrame {
         });
 
         // Tableau du panier
+        JPanel panelPanier = new JPanel(new BorderLayout());
+
         modelPanier = new DefaultTableModel(new String[]{"ID", "Nom", "Quantité", "Total"}, 0);
         tablePanier = new JTable(modelPanier);
-        add(new JScrollPane(tablePanier), BorderLayout.EAST);
+
+        JLabel TotalPanier = new JLabel( String.valueOf( TotalPanier() ) );
+
+        panelPanier.add(TotalPanier, BorderLayout.SOUTH);
+        panelPanier.add(new JScrollPane(tablePanier), BorderLayout.CENTER);
+
+        add(panelPanier, BorderLayout.EAST);
 
         // Panel d'actions
-        JPanel panelActions = new JPanel(new GridLayout(3, 2));
-        quantiteField = new JTextField();
+        JPanel panelActions = new JPanel(new GridLayout(2, 2));
+
+        JPanel panelQuantite = new JPanel(new BorderLayout());
+        JTextField quantiteField = new JTextField();
+
+        panelQuantite.add(new JLabel("Quantité : "), BorderLayout.WEST);
+        panelQuantite.add(quantiteField, BorderLayout.CENTER);
+
+        panelActions.add(panelQuantite);
+
         addButton = new JButton("Ajouter au Panier");
         checkoutButton = new JButton("Valider la Commande");
-        viewOrdersButton = new JButton("Voir mes Commandes");
 
-        panelActions.add(new JLabel("Quantité: "));
-        panelActions.add(quantiteField);
+        panelActions.add(new JLabel());
         panelActions.add(addButton);
         panelActions.add(checkoutButton);
-        panelActions.add(viewOrdersButton);
         add(panelActions, BorderLayout.SOUTH);
 
         // Action Ajouter au Panier
@@ -90,6 +112,7 @@ public class FenetreShopping extends JFrame {
                     int quantite = Integer.parseInt(quantiteField.getText());
 
                     panier.add(new Article(articleId, nom, "MarqueTemp", prix, prix, quantite));
+                    TotalPanier.setText(String.valueOf( TotalPanier() ) );
                     rafraichirPanier();
                 }
             }
@@ -124,7 +147,7 @@ public class FenetreShopping extends JFrame {
     }
 
     private static void rechercher(String texte, TableRowSorter<TableModel> sorter) {
-        if (texte.trim().length() == 0) {
+        if (texte.trim().isEmpty()) {
             sorter.setRowFilter(null);
         } else {
             sorter.setRowFilter(RowFilter.regexFilter("(?i)" + texte));
@@ -154,6 +177,15 @@ public class FenetreShopping extends JFrame {
                     article.getPrixUnitaire() * article.getQuantiteVrac()
             });
         }
+    }
+
+    private double TotalPanier() {
+        modelPanier.setRowCount(0);
+        double total = 0;
+        for (Article article : panier) {
+            total += article.getQuantiteVrac() * article.getPrixUnitaire();
+        }
+        return total;
     }
 
     public static void main(String[] args) {
