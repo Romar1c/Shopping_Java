@@ -18,7 +18,7 @@ public class ConnexionBDD {
 
                 // Établir la connexion
                 connexion = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
-                System.out.println("✅ Connexion réussie à la base de données !");
+                System.out.println("Connexion réussie à la base de données !");
             } catch (ClassNotFoundException e) {
                 System.out.println("🚨 Driver MySQL JDBC introuvable. Vérifie que le `.jar` est bien ajouté.");
             } catch (SQLException e) {

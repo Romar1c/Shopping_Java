@@ -46,8 +46,15 @@ public class FenetreConnexion extends JFrame {
 
                 if (clientId != -1) {
                     JOptionPane.showMessageDialog(null, "Connexion réussie !");
-                    new FenetreShopping(clientId); // Ouvre la fenêtre de shopping avec l'ID client
-                    dispose(); // Ferme la fenêtre de connexion
+                    int isAdmin = utilisateurControleur.verifierAdmin(clientId);
+                    if (isAdmin == 1) {
+                        new FenetreAdmin(clientId);
+                        dispose();
+                    }
+                    else{
+                        new FenetreShopping(clientId); // Ouvre la fenêtre de shopping avec l'ID client
+                        dispose(); // Ferme la fenêtre de connexion
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Email ou mot de passe incorrect.", "Erreur", JOptionPane.ERROR_MESSAGE);
                 }

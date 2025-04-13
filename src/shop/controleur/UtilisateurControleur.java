@@ -22,4 +22,33 @@ public class UtilisateurControleur {
         }
         return -1; // Retourne -1 si la connexion échoue
     }
+    public int verifierAdmin(int id){
+        String sql = "SELECT admin FROM clients WHERE id = ?";
+        try (PreparedStatement stmt = ConnexionBDD.getConnexion().prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("admin");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+    public String getUsername(int id) {
+        String sql = "SELECT nom FROM clients WHERE id = ?";
+        String username = "";
+        try (PreparedStatement stmt = ConnexionBDD.getConnexion().prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            System.out.println(stmt);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                username = rs.getString("nom");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return username;
+    }
 }

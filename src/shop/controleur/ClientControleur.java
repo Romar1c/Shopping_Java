@@ -13,7 +13,7 @@ public class ClientControleur {
     }
 
     public int inscrireClient(String nom, String email, String motDePasse) throws SQLException {
-        Client client = new Client(0, nom, email, motDePasse);
+        Client client = new Client(0, nom, email, motDePasse, 0);
         int result = gestionClient.ajouterClient(client);
         return result;
     }

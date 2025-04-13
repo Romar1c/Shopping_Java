@@ -25,11 +25,12 @@ public class GestionClient {
             count = rs.getInt(1);
         }
         if(count == 0) {
-            String sql = "INSERT INTO clients (nom, email, mot_de_passe, admin) VALUES (?, ?, ?, 0)";
+            String sql = "INSERT INTO clients (nom, email, mot_de_passe, admin) VALUES (?, ?, ?, ?)";
             try (PreparedStatement stmt = connexion.prepareStatement(sql)) {
                 stmt.setString(1, client.getNom());
                 stmt.setString(2, client.getEmail());
                 stmt.setString(3, client.getMotDePasse());
+                stmt.setInt(4, client.getAdmin());
                 stmt.executeUpdate();
                 System.out.println("Client ajouté avec succès !");
                 return 1;
