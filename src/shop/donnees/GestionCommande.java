@@ -86,7 +86,8 @@ public class GestionCommande {
                         "",
                         0,
                         rs.getDouble("prix_total"), // Correction ici, récupération du prix total
-                        rs.getInt("quantite_totale")
+                        rs.getInt("quantite_totale"),
+                        rs.getInt("stock")
                 ));
 
 

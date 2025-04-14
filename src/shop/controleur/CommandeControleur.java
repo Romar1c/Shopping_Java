@@ -54,14 +54,7 @@ public class CommandeControleur {
 
             while (rs.next()) {
                 List<Article> articles = new ArrayList<>();
-                articles.add(new Article(
-                        0,
-                        rs.getString("article_nom"),
-                        "",
-                        0,
-                        0,
-                        rs.getInt("quantite")
-                ));
+                articles.add(new Article(0, rs.getString("article_nom"), "", 0, 0, rs.getInt("quantite"),0));
 
                 commandes.add(new Commande(
                         rs.getInt("id"),
@@ -98,7 +91,8 @@ public class CommandeControleur {
                         rs.getString("marque"),
                         rs.getDouble("prix_unitaire"),
                         rs.getDouble("prix_vrac"),
-                        rs.getInt("quantite_vrac")
+                        rs.getInt("quantite_vrac"),
+                        rs.getInt("stock")
                 ));
             }
         } catch (SQLException e) {

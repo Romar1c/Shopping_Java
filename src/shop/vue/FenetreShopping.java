@@ -111,7 +111,7 @@ public class FenetreShopping extends JFrame {
                     double prix = (double) modelArticles.getValueAt(selectedRow, 3);
                     int quantite = Integer.parseInt(quantiteField.getText());
 
-                    panier.add(new Article(articleId, nom, "MarqueTemp", prix, prix, quantite));
+                    panier.add(new Article(articleId, nom, "MarqueTemp", prix, prix, quantite,0));
                     TotalPanier.setText(String.valueOf( TotalPanier() ) );
                     rafraichirPanier();
                 }

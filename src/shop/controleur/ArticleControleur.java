@@ -13,7 +13,7 @@ public class ArticleControleur {
 
     // Ajouter un article
     public void ajouterArticle(String nom, String marque, double prixUnitaire, double prixVrac, int quantiteVrac) {
-        Article article = new Article(0, nom, marque, prixUnitaire, prixVrac, quantiteVrac);
+        Article article = new Article(0, nom, marque, prixUnitaire, prixVrac, quantiteVrac,0);
         gestionArticle.ajouterArticle(article);
     }
 
@@ -23,8 +23,8 @@ public class ArticleControleur {
     }
 
     // Modifier un article
-    public void modifierArticle(int id, String nom, String marque, double prixUnitaire, double prixVrac, int quantiteVrac) {
-        Article article = new Article(id, nom, marque, prixUnitaire, prixVrac, quantiteVrac);
+    public void modifierArticle(int id, String nom, String marque, double prixUnitaire, double prixVrac, int quantiteVrac, int stock) {
+        Article article = new Article(id, nom, marque, prixUnitaire, prixVrac, quantiteVrac, stock);
         gestionArticle.modifierArticle(article);
     }
 

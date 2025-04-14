@@ -77,7 +77,8 @@ public class GestionArticle {
                         rs.getString("marque"),
                         rs.getDouble("prix_unitaire"),
                         rs.getDouble("prix_vrac"),
-                        rs.getInt("quantite_vrac")
+                        rs.getInt("quantite_vrac"),
+                        rs.getInt("stock")
                 ));
             }
         } catch (SQLException e) {

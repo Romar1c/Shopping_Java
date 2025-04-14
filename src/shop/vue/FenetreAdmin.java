@@ -27,12 +27,22 @@ public class FenetreAdmin extends JFrame {
         utilisateurControleur = new UtilisateurControleur();
         nomField = new JLabel(utilisateurControleur.getUsername(cliendId));
         add(nomField);
+
         inventaireButton = new JButton("Inventaire");
         add(inventaireButton);
+
         clientButton = new JButton("Client");
         add(clientButton);
+
         statsButton = new JButton("Stats");
         add(statsButton);
+
+        inventaireButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FenetreInventaire();
+            }
+        });
 
         setVisible(true);
     }
