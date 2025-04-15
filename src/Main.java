@@ -1,6 +1,5 @@
 import shop.vue.FenetreConnexion;
 
-
 import javax.swing.*;
 
 public class Main {
@@ -19,7 +18,6 @@ public class Main {
                 }
             });
         } catch (Exception ex) {
-            // Erreur de LookAndFeel
             ex.printStackTrace();
         }
 

@@ -20,6 +20,7 @@ public class FenetreConnexion extends JFrame {
         setSize(400, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(3, 2));
+        setLocationRelativeTo(null);
 
         // Champs de saisie
         add(new JLabel("Email: "));
@@ -64,7 +65,8 @@ public class FenetreConnexion extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FenetreInscription fenetreInscription = new FenetreInscription();
+                new FenetreInscription();
+                dispose();
             }
         });
 

@@ -2,7 +2,6 @@ package shop.vue;
 
 import shop.controleur.CommandeControleur;
 import shop.modele.Article;
-import shop.test;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -58,9 +57,19 @@ public class FenetreInventaire extends JFrame {
                     article.getPrixUnitaire(),
                     article.getStock(),
                     "Details"
-
             });
         }
+
+        JButton BtnNouvelArticle = new JButton("Nouvel Article");
+        add(BtnNouvelArticle, BorderLayout.SOUTH);
+
+        BtnNouvelArticle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FenetreAjouter();
+                dispose();
+            }
+        });
         setVisible(true);
     }
 
@@ -87,7 +96,7 @@ public class FenetreInventaire extends JFrame {
 
             button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    fireEditingStopped(); // Nécessaire pour que l'éditeur termine proprement
+                    fireEditingStopped();
                 }
             });
         }
@@ -104,10 +113,9 @@ public class FenetreInventaire extends JFrame {
         @Override
         public Object getCellEditorValue() {
             if (clicked) {
-                String idArticle = tableArticles.getValueAt(selectedRow, 0).toString();
-                // Ici, tu fais ce que tu veux avec l'ID, par exemple ouvrir une nouvelle fenêtre
-                JOptionPane.showMessageDialog(button, "Détails de l'article ID: " + idArticle);
-                // OU appeler une méthode pour ouvrir une nouvelle page
+                int idArticle = (int) tableArticles.getValueAt(selectedRow, 0);
+                new FenetreDetail(idArticle);
+                dispose();
             }
             clicked = false;
             return label;

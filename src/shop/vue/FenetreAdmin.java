@@ -41,6 +41,7 @@ public class FenetreAdmin extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new FenetreInventaire();
+                dispose();
             }
         });
 

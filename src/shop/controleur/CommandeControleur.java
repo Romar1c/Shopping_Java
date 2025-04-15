@@ -94,6 +94,7 @@ public class CommandeControleur {
                         rs.getInt("quantite_vrac"),
                         rs.getInt("stock")
                 ));
+                System.out.println(articles);
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -138,10 +138,9 @@ public class FenetreShopping extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new FenetreCommandes(clientId);
-
+                dispose();
             }
         });
-
         rafraichirArticles();
         setVisible(true);
     }

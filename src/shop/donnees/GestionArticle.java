@@ -47,14 +47,18 @@ public class GestionArticle {
 
     // Modifier un article
     public void modifierArticle(Article article) {
-        String sql = "UPDATE articles SET nom = ?, marque = ?, prix_unitaire = ?, prix_vrac = ?, quantite_vrac = ? WHERE id = ?";
+        String sql = "UPDATE articles SET nom = ?, marque = ?, prix_unitaire = ?, prix_vrac = ?, quantite_vrac = ?, stock = ? WHERE id = ?";
         try (PreparedStatement stmt = connexion.prepareStatement(sql)) {
             stmt.setString(1, article.getNom());
             stmt.setString(2, article.getMarque());
             stmt.setDouble(3, article.getPrixUnitaire());
             stmt.setDouble(4, article.getPrixVrac());
             stmt.setInt(5, article.getQuantiteVrac());
-            stmt.setInt(6, article.getId());
+            stmt.setInt(6, article.getStock());
+            stmt.setInt(7, article.getId());
+
+            System.out.println(stmt.toString());
+
             stmt.executeUpdate();
             System.out.println("Article modifié avec succès !");
         } catch (SQLException e) {
@@ -69,6 +73,29 @@ public class GestionArticle {
         try (PreparedStatement stmt = connexion.prepareStatement(sql)) {
             stmt.setString(1, "%" + motCle + "%");
             stmt.setString(2, "%" + motCle + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                articles.add(new Article(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("marque"),
+                        rs.getDouble("prix_unitaire"),
+                        rs.getDouble("prix_vrac"),
+                        rs.getInt("quantite_vrac"),
+                        rs.getInt("stock")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return articles;
+    }
+
+    public List<Article> rechercherArticles(int id) {
+        List<Article> articles = new ArrayList<>();
+        String sql = "SELECT * FROM articles WHERE id = ?";
+        try (PreparedStatement stmt = connexion.prepareStatement(sql)) {
+            stmt.setInt(1,  id);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 articles.add(new Article(
