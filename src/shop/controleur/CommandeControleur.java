@@ -21,13 +21,10 @@ public class CommandeControleur {
 
     // Ajouter une commande
     public void ajouterCommande(int clientId, List<Article> articles) {
+        System.out.println("ajouterCommande");
         System.out.println(articles);
-        double PrixUnitaire = articles.stream().mapToDouble(Article::getPrixUnitaire).sum();
-        System.out.println(PrixUnitaire);
-        int quantite = articles.stream().mapToInt(Article::getQuantiteVrac).sum();
-        System.out.println(quantite);
 
-        double PrixTotal = quantite * PrixUnitaire;
+        double PrixTotal = articles.stream().mapToDouble(Article::getPrixTotal).sum();
         System.out.println(PrixTotal);
 
         Commande commande = new Commande(0, clientId, new Date(), PrixTotal, articles);

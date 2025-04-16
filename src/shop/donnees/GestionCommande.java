@@ -42,8 +42,8 @@ public class GestionCommande {
             for (Article article : articles) {
                 stmt.setInt(1, commandeId);
                 stmt.setInt(2, article.getId());
-                stmt.setInt(3, article.getQuantiteVrac()); // Correction ici pour prendre en compte la quantité réelle
-                stmt.setDouble(4, article.getPrixUnitaire() * article.getQuantiteVrac()); // Ajout du prix total par article
+                stmt.setInt(3, article.getQuantite());
+                stmt.setDouble(4, article.getPrixTotal());
                 stmt.executeUpdate();
             }
         } catch (SQLException e) {

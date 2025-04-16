@@ -8,6 +8,7 @@ public class Article {
     private double prixVrac;
     private int quantiteVrac;
     private int stock;
+    private int quantite;
 
     public Article(int id, String nom, String marque, double prixUnitaire, double prixVrac, int quantiteVrac, int stock) {
         this.id = id;
@@ -19,6 +20,17 @@ public class Article {
         this.stock = stock;
     }
 
+    public Article(int id, String nom, String marque, double prixUnitaire, double prixVrac, int quantiteVrac, int stock, int quantite) {
+        this.id = id;
+        this.nom = nom;
+        this.marque = marque;
+        this.prixUnitaire = prixUnitaire;
+        this.prixVrac = prixVrac;
+        this.quantiteVrac = quantiteVrac;
+        this.stock = stock;
+        this.quantite = quantite;
+    }
+
     // Getters
     public int getId() { return id; }
     public String getNom() { return nom; }
@@ -27,6 +39,7 @@ public class Article {
     public double getPrixVrac() { return prixVrac; }
     public int getQuantiteVrac() { return quantiteVrac; }
     public int getStock() { return stock; }
+    public int getQuantite() { return quantite; }
 
     // Setters
     public void setNom(String nom) { this.nom = nom; }
@@ -35,6 +48,7 @@ public class Article {
     public void setPrixVrac(double prixVrac) { this.prixVrac = prixVrac; }
     public void setQuantiteVrac(int quantiteVrac) { this.quantiteVrac = quantiteVrac; }
     public void setStock(int stock) { this.stock = stock; }
+    public void setQuantite(int quantite) { this.quantite = quantite; }
 
     @Override
     public String toString() {
@@ -46,11 +60,12 @@ public class Article {
                 ", prixVrac=" + prixVrac +
                 ", quantiteVrac=" + quantiteVrac +
                 ", stock=" + stock +
+                ", quantite=" + quantite +
                 '}';
     }
 
     public double getPrixTotal() {
-        return this.prixUnitaire * this.quantiteVrac;
+        return ((quantite/quantiteVrac)*prixVrac*quantiteVrac) + (quantite%quantiteVrac * prixUnitaire);
     }
 
 

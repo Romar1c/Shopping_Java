@@ -34,7 +34,7 @@ public class FenetreShopping extends JFrame {
         setLayout(new BorderLayout());
 
         // Tableau des articles disponibles
-        modelArticles = new DefaultTableModel(new String[]{"ID", "Nom", "Marque", "Prix Unitaire"}, 0);
+        modelArticles = new DefaultTableModel(new String[]{"ID", "Nom", "Marque", "Prix Unitaire", "Quantite Vrac", "Prix Vrac"}, 0);
         tableArticles = new JTable(modelArticles);
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableArticles.getModel());
         tableArticles.setRowSorter(sorter);
@@ -108,10 +108,14 @@ public class FenetreShopping extends JFrame {
                 if (selectedRow != -1) {
                     int articleId = (int) modelArticles.getValueAt(selectedRow, 0);
                     String nom = (String) modelArticles.getValueAt(selectedRow, 1);
+                    String marque = (String) modelArticles.getValueAt(selectedRow, 2);
                     double prix = (double) modelArticles.getValueAt(selectedRow, 3);
+                    int quantiteVrac = (int) modelArticles.getValueAt(selectedRow, 4);
+                    double prixVrac = (double) modelArticles.getValueAt(selectedRow, 5);
+
                     int quantite = Integer.parseInt(quantiteField.getText());
 
-                    panier.add(new Article(articleId, nom, "MarqueTemp", prix, prix, quantite,0));
+                    panier.add(new Article(articleId, nom, marque, prix, prixVrac, quantiteVrac,0, quantite));
                     TotalPanier.setText(String.valueOf( TotalPanier() ) );
                     rafraichirPanier();
                 }
@@ -160,7 +164,9 @@ public class FenetreShopping extends JFrame {
                     article.getId(),
                     article.getNom(),
                     article.getMarque(),
-                    article.getPrixUnitaire()
+                    article.getPrixUnitaire(),
+                    article.getQuantiteVrac(),
+                    article.getPrixVrac()
             });
         }
     }
@@ -171,8 +177,8 @@ public class FenetreShopping extends JFrame {
             modelPanier.addRow(new Object[]{
                     article.getId(),
                     article.getNom(),
-                    article.getQuantiteVrac(),
-                    article.getPrixUnitaire() * article.getQuantiteVrac()
+                    article.getQuantite(),
+                    article.getPrixTotal()
             });
         }
     }
@@ -181,7 +187,7 @@ public class FenetreShopping extends JFrame {
         modelPanier.setRowCount(0);
         double total = 0;
         for (Article article : panier) {
-            total += article.getQuantiteVrac() * article.getPrixUnitaire();
+            total += article.getPrixTotal();
         }
         return total;
     }
