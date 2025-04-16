@@ -40,7 +40,6 @@ public class UtilisateurControleur {
         String username = "";
         try (PreparedStatement stmt = ConnexionBDD.getConnexion().prepareStatement(sql)) {
             stmt.setInt(1, id);
-            System.out.println(stmt);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 username = rs.getString("nom");

@@ -58,7 +58,6 @@ public class GestionClient {
                         rs.getString("nom"),
                         rs.getString("email")
                 ));
-                System.out.println(clients);
             }
         }
         catch (SQLException e) {

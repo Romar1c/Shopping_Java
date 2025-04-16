@@ -10,13 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class FenetreArticles extends JFrame {
+public class FenetreArticles_PasUtilise extends JFrame {
     private ArticleControleur articleControleur;
     private JTable table;
     private DefaultTableModel tableModel;
     private JTextField searchField, nomField, marqueField, prixUnitaireField, prixVracField, quantiteVracField;
 
-    public FenetreArticles() {
+    public FenetreArticles_PasUtilise() {
         articleControleur = new ArticleControleur();
         setTitle("Gestion des Articles");
         setSize(800, 600);
@@ -115,6 +115,6 @@ public class FenetreArticles extends JFrame {
     }
 
     public static void main(String[] args) {
-        new FenetreArticles();
+        new FenetreArticles_PasUtilise();
     }
 }

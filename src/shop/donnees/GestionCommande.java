@@ -29,7 +29,7 @@ public class GestionCommande {
                 int commandeId = generatedKeys.getInt(1);
                 ajouterArticlesCommande(commandeId, commande.getArticles());
             }
-            System.out.println("✅ Commande ajoutée avec succès !");
+            System.out.println("Commande ajoutée avec succès !");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -57,7 +57,7 @@ public class GestionCommande {
         try (PreparedStatement stmt = connexion.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
-            System.out.println("✅ Commande supprimée avec succès !");
+            System.out.println("Commande supprimée avec succès !");
         } catch (SQLException e) {
             e.printStackTrace();
         }

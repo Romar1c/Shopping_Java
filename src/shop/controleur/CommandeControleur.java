@@ -21,11 +21,7 @@ public class CommandeControleur {
 
     // Ajouter une commande
     public void ajouterCommande(int clientId, List<Article> articles) {
-        System.out.println("ajouterCommande");
-        System.out.println(articles);
-
         double PrixTotal = articles.stream().mapToDouble(Article::getPrixTotal).sum();
-        System.out.println(PrixTotal);
 
         Commande commande = new Commande(0, clientId, new Date(), PrixTotal, articles);
         gestionCommande.ajouterCommande(commande);
@@ -44,7 +40,6 @@ public class CommandeControleur {
                 "JOIN commande_articles ca ON c.id = ca.commande_id " +
                 "JOIN articles a ON ca.article_id = a.id " +
                 "WHERE c.client_id = ?";
-        System.out.println(sql);
         try (PreparedStatement stmt = ConnexionBDD.getConnexion().prepareStatement(sql)) {
             stmt.setInt(1, clientId);
             ResultSet rs = stmt.executeQuery();
@@ -91,7 +86,6 @@ public class CommandeControleur {
                         rs.getInt("quantite_vrac"),
                         rs.getInt("stock")
                 ));
-                System.out.println(articles);
             }
         } catch (SQLException e) {
             e.printStackTrace();

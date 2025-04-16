@@ -57,8 +57,6 @@ public class GestionArticle {
             stmt.setInt(6, article.getStock());
             stmt.setInt(7, article.getId());
 
-            System.out.println(stmt.toString());
-
             stmt.executeUpdate();
             System.out.println("Article modifié avec succès !");
         } catch (SQLException e) {

@@ -72,7 +72,6 @@ public class FenetreDetail extends JFrame {
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Valeurs modifiées");
                 article.setNom(textFields[1].getText());
                 article.setMarque(textFields[2].getText());
                 article.setPrixUnitaire(Double.parseDouble(textFields[3].getText()));
