@@ -40,8 +40,23 @@ public class FenetreAdmin extends JFrame {
         inventaireButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new FenetreInventaire();
+                new FenetreInventaire(clientId);
                 dispose();
+            }
+        });
+
+        clientButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FenetreDossierClient(clientId);
+                dispose();
+            }
+        });
+
+        statsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Stats");
             }
         });
 

@@ -17,8 +17,10 @@ import java.util.List;
 public class FenetreDetail extends JFrame {
     GestionArticle gestionArticle;
     Article article;
+    private int clientId;
 
-    public FenetreDetail(int id) {
+    public FenetreDetail(int id, int clienID) {
+        this.clientId = clienID;
 
         setTitle("Detail produit n°" + Integer.toString(id));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,7 +82,7 @@ public class FenetreDetail extends JFrame {
 
                 gestionArticle.modifierArticle(article);
 
-                new FenetreInventaire();
+                new FenetreInventaire(clientId);
                 dispose();
             }
         });
@@ -89,13 +91,13 @@ public class FenetreDetail extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 gestionArticle.supprimerArticle(article.getId());
 
-                new FenetreInventaire();
+                new FenetreInventaire(clientId);
                 dispose();
             }
         });
 
     }
     public static void main(String[] args) {
-        new FenetreDetail(1);
+        new FenetreDetail(1, 1);
     }
 }

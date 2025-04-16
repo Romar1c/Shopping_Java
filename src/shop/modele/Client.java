@@ -7,6 +7,12 @@ public class Client {
     private String motDePasse;
     private int admin;
 
+    public Client(int id, String nom, String email){
+        this.id = id;
+        this.nom = nom;
+        this.email = email;
+    }
+
     public Client(int id, String nom, String email, String motDePasse, int admin) {
         this.id = id;
         this.nom = nom;

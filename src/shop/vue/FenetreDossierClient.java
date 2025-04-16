@@ -1,7 +1,9 @@
 package shop.vue;
 
 import shop.controleur.CommandeControleur;
+import shop.donnees.GestionClient;
 import shop.modele.Article;
+import shop.modele.Client;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -13,18 +15,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class FenetreInventaire extends JFrame {
-
+public class FenetreDossierClient extends JFrame {
     private int clientId;
-    private CommandeControleur commandeControleur;
+    private GestionClient gestionClient;
     private DefaultTableModel modelArticles;
     private JTable tableArticles;
 
-    public FenetreInventaire(int clientId) {
+    public FenetreDossierClient(int clientId) {
         this.clientId = clientId;
-        this.commandeControleur = new CommandeControleur();
+        this.gestionClient = new GestionClient();
 
-        setTitle("Inventaire");
+        setTitle("Liste Client");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
         setLocationRelativeTo(null);
@@ -32,7 +33,7 @@ public class FenetreInventaire extends JFrame {
         setLayout(new BorderLayout());
 
         JPanel North = new JPanel(new BorderLayout());
-        JLabel label = new JLabel("Inventaire");
+        JLabel label = new JLabel("Liste Client");
         North.add(label, BorderLayout.CENTER);
 
         JButton retour = new JButton("Retour");
@@ -40,34 +41,28 @@ public class FenetreInventaire extends JFrame {
         add(North, BorderLayout.NORTH);
 
         // Creation de la table
-        modelArticles = new DefaultTableModel(new String[]{"ID", "Nom", "Marque", "Prix Unitaire", "Stock", "Details"}, 0);
+        modelArticles = new DefaultTableModel(new String[]{"ID", "Nom", "Email", "Details"}, 0);
         tableArticles = new JTable(modelArticles);
 
         // Tri de la table
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableArticles.getModel());
         tableArticles.setRowSorter(sorter);
 
-        tableArticles.getColumn("Details").setCellRenderer(new ButtonRenderer());
-        tableArticles.getColumn("Details").setCellEditor(new ButtonEditor(new JCheckBox()));
+        tableArticles.getColumn("Details").setCellRenderer(new FenetreDossierClient.ButtonRenderer());
+        tableArticles.getColumn("Details").setCellEditor(new FenetreDossierClient.ButtonEditor(new JCheckBox()));
 
         JScrollPane scrollPane = new JScrollPane(tableArticles);
         add(scrollPane, BorderLayout.CENTER);
 
         modelArticles.setRowCount(0);
-        List<Article> articles = commandeControleur.recupererArticles();
-        for (Article article : articles) {
+        List<Client> clients = gestionClient.getClients();
+        for (Client client : clients) {
             modelArticles.addRow(new Object[]{
-                    article.getId(),
-                    article.getNom(),
-                    article.getMarque(),
-                    article.getPrixUnitaire(),
-                    article.getStock(),
-                    "Details"
+                    client.getId(),
+                    client.getNom(),
+                    client.getEmail()
             });
         }
-
-        JButton BtnNouvelArticle = new JButton("Nouvel Article");
-        add(BtnNouvelArticle, BorderLayout.SOUTH);
 
         retour.addActionListener(new ActionListener() {
             @Override
@@ -77,16 +72,8 @@ public class FenetreInventaire extends JFrame {
             }
         });
 
-        BtnNouvelArticle.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new FenetreAjouter(clientId);
-                dispose();
-            }
-        });
         setVisible(true);
     }
-
     class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer() {
             setOpaque(true);
@@ -127,9 +114,8 @@ public class FenetreInventaire extends JFrame {
         @Override
         public Object getCellEditorValue() {
             if (clicked) {
-                int idArticle = (int) tableArticles.getValueAt(selectedRow, 0);
-                new FenetreDetail(idArticle, clientId);
-                dispose();
+                int idClient = (int) tableArticles.getValueAt(selectedRow, 0);
+                new FenetreCommandes(idClient);
             }
             clicked = false;
             return label;
@@ -137,6 +123,6 @@ public class FenetreInventaire extends JFrame {
     }
 
     public static void main(String[] args) {
-        new FenetreInventaire(1);
+        new FenetreDossierClient(1);
     }
 }

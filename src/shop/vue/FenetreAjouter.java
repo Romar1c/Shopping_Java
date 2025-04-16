@@ -11,12 +11,13 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class FenetreAjouter extends JFrame {
+    private int clientId;
     private ArticleControleur articleControleur;
     private JTable table;
     private DefaultTableModel tableModel;
     private JTextField searchField, nomField, marqueField, prixUnitaireField, prixVracField, quantiteVracField;
 
-    public FenetreAjouter() {
+    public FenetreAjouter(int clientId) {
         articleControleur = new ArticleControleur();
         setTitle("Ajouter un Article");
         setSize(800, 600);
@@ -51,7 +52,7 @@ public class FenetreAjouter extends JFrame {
                 double prixVrac = Double.parseDouble(prixVracField.getText());
                 int quantiteVrac = Integer.parseInt(quantiteVracField.getText());
                 articleControleur.ajouterArticle(nom, marque, prixUnitaire, prixVrac, quantiteVrac);
-                new FenetreInventaire();
+                new FenetreInventaire(clientId);
                 dispose();
             }
         });
@@ -60,6 +61,6 @@ public class FenetreAjouter extends JFrame {
     }
 
     public static void main(String[] args) {
-        new FenetreAjouter();
+        new FenetreAjouter(1);
     }
 }

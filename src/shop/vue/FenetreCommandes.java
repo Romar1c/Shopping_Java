@@ -18,7 +18,8 @@ public class FenetreCommandes extends JFrame {
     public FenetreCommandes(int clientId) {
         this.clientId = clientId;
         commandeControleur = new CommandeControleur();
-        setTitle("Mes Commandes");
+
+        setTitle("Commandes client " + clientId);
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());

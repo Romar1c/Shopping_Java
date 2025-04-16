@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GestionClient {
     private Connection connexion;
@@ -43,5 +45,25 @@ public class GestionClient {
             return 0;
         }
         return 0;
+    }
+    public List<Client> getClients(){
+        List<Client> clients = new ArrayList<>();
+
+        String sql = "SELECT * FROM `clients` WHERE admin = 0;";
+        try (PreparedStatement stmt = ConnexionBDD.getConnexion().prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                clients.add(new Client(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("email")
+                ));
+                System.out.println(clients);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clients;
     }
 }
