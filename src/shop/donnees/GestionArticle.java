@@ -111,4 +111,28 @@ public class GestionArticle {
         }
         return articles;
     }
+
+    public boolean VerifierDisponibiliteArticle(Article article) {
+        int stock = article.getStock();
+        int idArticle = article.getId();
+        int stockArticle = 0;
+
+        String sql = "SELECT stock FROM articles WHERE id = ?";
+        try (PreparedStatement stmt = connexion.prepareStatement(sql)){
+            stmt.setInt(1, idArticle);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                stockArticle = rs.getInt("stock");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (stockArticle > stock) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

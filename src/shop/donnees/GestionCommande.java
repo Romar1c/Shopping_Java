@@ -15,6 +15,22 @@ public class GestionCommande {
         this.connexion = ConnexionBDD.getConnexion();
     }
 
+    public Commande VerifCommande(Commande commande) {
+        Commande commandeVerif = commande;
+        List<Article> ListArticleVerif = new ArrayList<>();
+        GestionArticle gestionArticle = new GestionArticle();
+
+        for (Article article : commande.getArticles()) {
+            if(gestionArticle.VerifierDisponibiliteArticle(article)){
+                ListArticleVerif.add(article);
+            }
+        }
+        double PrixTotal = ListArticleVerif.stream().mapToDouble(Article::getPrixTotal).sum();
+        commandeVerif.setArticles(ListArticleVerif);
+        commandeVerif.setTotal(PrixTotal);
+        return commandeVerif;
+    }
+
     // Ajouter une commande
     public void ajouterCommande(Commande commande) {
         String sql = "INSERT INTO commandes (client_id, date_commande, total) VALUES (?, ?, ?)";
@@ -37,19 +53,38 @@ public class GestionCommande {
 
     // Ajouter les articles liés à une commande
     private void ajouterArticlesCommande(int commandeId, List<Article> articles) {
-        String sql = "INSERT INTO commande_articles (commande_id, article_id, quantite, prix_total) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement stmt = connexion.prepareStatement(sql)) {
+        String insertSQL = "INSERT INTO commande_articles (commande_id, article_id, quantite, prix_total) VALUES (?, ?, ?, ?)";
+        String selectStockSQL = "SELECT stock FROM articles WHERE id = ?";
+        String updateStockSQL = "UPDATE articles SET stock = ? WHERE id = ?";
+
+        try (
+                PreparedStatement insertStmt = connexion.prepareStatement(insertSQL);
+                PreparedStatement selectStockStmt = connexion.prepareStatement(selectStockSQL);
+                PreparedStatement updateStockStmt = connexion.prepareStatement(updateStockSQL)
+        ) {
             for (Article article : articles) {
-                stmt.setInt(1, commandeId);
-                stmt.setInt(2, article.getId());
-                stmt.setInt(3, article.getQuantite());
-                stmt.setDouble(4, article.getPrixTotal());
-                stmt.executeUpdate();
+                insertStmt.setInt(1, commandeId);
+                insertStmt.setInt(2, article.getId());
+                insertStmt.setInt(3, article.getQuantite());
+                insertStmt.setDouble(4, article.getPrixTotal());
+                insertStmt.executeUpdate();
+
+                selectStockStmt.setInt(1, article.getId());
+                ResultSet rs = selectStockStmt.executeQuery();
+                if (rs.next()) {
+                    int stockActuel = rs.getInt("stock");
+                    int nouveauStock = stockActuel - article.getQuantite();
+
+                    updateStockStmt.setInt(1, nouveauStock);
+                    updateStockStmt.setInt(2, article.getId());
+                    updateStockStmt.executeUpdate();
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     // Supprimer une commande
     public void supprimerCommande(int id) {

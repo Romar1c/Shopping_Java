@@ -24,7 +24,9 @@ public class CommandeControleur {
         double PrixTotal = articles.stream().mapToDouble(Article::getPrixTotal).sum();
 
         Commande commande = new Commande(0, clientId, new Date(), PrixTotal, articles);
-        gestionCommande.ajouterCommande(commande);
+        Commande commandeVerif = gestionCommande.VerifCommande(commande);
+
+        gestionCommande.ajouterCommande(commandeVerif);
     }
 
     // Supprimer une commande
