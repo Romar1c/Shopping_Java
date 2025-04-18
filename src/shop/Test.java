@@ -55,7 +55,7 @@ public class Test {
     // Fonction pour filtrer
     private static void rechercher(String texte, TableRowSorter<TableModel> sorter) {
         if (texte.trim().length() == 0) {
-            sorter.setRowFilter(null); // Pas de filtre
+            sorter.setRowFilter(null); // Pas de filtre POUR LA FONCTION
         } else {
             sorter.setRowFilter(RowFilter.regexFilter("(?i)" + texte)); // Filtre insensible à la casse
         }
