@@ -45,7 +45,7 @@ public class Test {
             }
         });
 
-        // ajouter a la fenetre
+
         frame.add(panelRecherche, BorderLayout.NORTH);
         frame.add(scrollPane, BorderLayout.CENTER);
 
