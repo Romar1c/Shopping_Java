@@ -13,7 +13,7 @@ public class Test {
         frame.setLayout(new BorderLayout());
 
         String[][] donnees = {
-                {"Alice", "20", "tttgggf"},
+                {"Alice", "20", "Etudiants"},
                 {"Bob", "22", "Développeur"},
                 {"Charlie", "19", "Designer"},
                 {"David", "25", "Architecte"}
@@ -45,7 +45,7 @@ public class Test {
             }
         });
 
-        // Ajouter tout à la fenêtre
+        // ajouter a la fenetre
         frame.add(panelRecherche, BorderLayout.NORTH);
         frame.add(scrollPane, BorderLayout.CENTER);
 
