@@ -15,7 +15,7 @@ public class Test {
         String[][] donnees = {
                 {"Alice", "20", "Etudiant"},
                 {"Charlotte", "22", "Développeuse"},
-                {"Charlie", "19", "Designeuse"},
+                {"Bob", "19", "Designeur"},
                 {"David", "25", "Ingenieur "}
         };
         String[] colonnes = {"Nom", "Age", "Metier"};
@@ -45,7 +45,7 @@ public class Test {
             }
         });
 
-
+// Ajouter a la fenetre
         frame.add(panelRecherche, BorderLayout.NORTH);
         frame.add(scrollPane, BorderLayout.CENTER);
 
