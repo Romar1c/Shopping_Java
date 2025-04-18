@@ -15,7 +15,7 @@ public class Test {
         String[][] donnees = {
                 {"Alice", "20", "tttgggf"},
                 {"Bob", "22", "Développeur"},
-                {"Charlie", "19", "Designer rowwwwwwww"},
+                {"Charlie", "19", "DesignRROOOer rowwwwwwww"},
                 {"David", "257827", "TT"}
         };
         String[] colonnes = {"Nomtalia", "Age", "Profession"};
