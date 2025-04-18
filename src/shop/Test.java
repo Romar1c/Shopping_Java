@@ -14,7 +14,7 @@ public class Test {
 
         String[][] donnees = {
                 {"Alice", "20", "Etudiant"},
-                {"Bob", "22", "Développeurs"},
+                {"Charlotte", "22", "Développeuse"},
                 {"Charlie", "19", "Designeuse"},
                 {"David", "25", "Ingenieur "}
         };
