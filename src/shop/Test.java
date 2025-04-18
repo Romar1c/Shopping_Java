@@ -29,7 +29,7 @@ public class Test {
         // Barre de recherche
         JPanel panelRecherche = new JPanel(new BorderLayout());
         JTextField champRecherche = new JTextField();
-        panelRecherche.add(new JLabel("Recherche : "), BorderLayout.WEST);
+        panelRecherche.add(new JLabel("RechercheR LA LISTE : "), BorderLayout.WEST);
         panelRecherche.add(champRecherche, BorderLayout.CENTER);
 
         // Quand on tape dans la barre de recherche
