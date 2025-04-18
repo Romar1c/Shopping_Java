@@ -16,7 +16,7 @@ public class Test {
                 {"Alice", "20", "tttgggf"},
                 {"Bob", "22", "Développeur TALIA"},
                 {"Charlie", "19", "Designer rowwwwwwww"},
-                {"David", "257827", "Architecte"}
+                {"David", "257827", "ArchRitecte"}
         };
         String[] colonnes = {"Nomtalia", "Age", "Profession"};
 
