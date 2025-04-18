@@ -7,7 +7,7 @@ import java.awt.event.*;
 
 public class Test {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Tableau avec recherche");
+        JFrame frame = new JFrame("Tableau de recherche");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
         frame.setLayout(new BorderLayout());
