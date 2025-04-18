@@ -14,11 +14,11 @@ public class Test {
 
         String[][] donnees = {
                 {"Alice", "20", "tttgggf"},
-                {"Bob", "22", "Développeur"},
-                {"Charlie", "19", "Designer"},
-                {"David", "25", "Architecte"}
+                {"Bob", "22", "Développeur TALIA"},
+                {"Charlie", "19", "Designer rowwwwwwww"},
+                {"David", "257827", "Architecte"}
         };
-        String[] colonnes = {"Nom", "Age", "Profession"};
+        String[] colonnes = {"Nomtalia", "Age", "Profession"};
 
         JTable table = new JTable(donnees, colonnes);
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
@@ -45,7 +45,7 @@ public class Test {
             }
         });
 
-        // Ajouter tout à la fenêtre
+        // Ajouter tout à la fenêtre et supprimer les trucs
         frame.add(panelRecherche, BorderLayout.NORTH);
         frame.add(scrollPane, BorderLayout.CENTER);
 
