@@ -13,7 +13,7 @@ public class Test {
         frame.setLayout(new BorderLayout());
 
         String[][] donnees = {
-                {"Alice", "20", "Etudiants"},
+                {"Alice", "20", "Etudiant"},
                 {"Bob", "22", "Développeurs"},
                 {"Charlie", "19", "Designeuse"},
                 {"David", "25", "Ingenieur "}
