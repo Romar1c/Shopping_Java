@@ -18,7 +18,7 @@ public class Test {
                 {"Charlie", "19", "Designeuse"},
                 {"David", "25", "Ingenieur "}
         };
-        String[] colonnes = {"Nom", "Age", "Profession"};
+        String[] colonnes = {"Nom", "Age", "Metier"};
 
         JTable table = new JTable(donnees, colonnes);
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
