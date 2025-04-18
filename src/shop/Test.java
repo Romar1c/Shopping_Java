@@ -52,7 +52,7 @@ public class Test {
         frame.setVisible(true);
     }
 
-
+    // Fonction pour filtrer
     private static void rechercher(String texte, TableRowSorter<TableModel> sorter) {
         if (texte.trim().length() == 0) {
             sorter.setRowFilter(null); // Pas de filtre
