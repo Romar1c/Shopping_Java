@@ -56,7 +56,8 @@ public class FenetreAdmin extends JFrame {
         statsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Stats");
+                new FenetreStats();
+                dispose();
             }
         });
 

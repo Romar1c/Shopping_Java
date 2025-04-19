@@ -65,4 +65,48 @@ public class GestionClient {
         }
         return clients;
     }
+
+    public Client FideleEur(){
+        Client client = null;
+
+        String sql = "SELECT c.id, c.nom, SUM(co.total) AS total_depense\n" +
+                "FROM clients c\n" +
+                "JOIN commandes co ON c.id = co.client_id\n" +
+                "GROUP BY c.id, c.nom\n" +
+                "ORDER BY total_depense DESC\n" +
+                "LIMIT 1;\n";
+
+        try (PreparedStatement stmt = ConnexionBDD.getConnexion().prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                client = new Client(rs.getInt("id"), rs.getString("nom"), rs.getDouble("total_depense"));
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return client;
+    }
+
+    public Client FideleCommande(){
+        Client client = null;
+        String sql = "SELECT c.id AS client_id, c.nom AS nom_client, COUNT(co.id) AS nombre_commandes\n" +
+                "FROM clients c\n" +
+                "JOIN commandes co ON c.id = co.client_id\n" +
+                "GROUP BY c.id, c.nom\n" +
+                "ORDER BY nombre_commandes DESC\n" +
+                "LIMIT 1;\n";
+
+        try (PreparedStatement stmt = ConnexionBDD.getConnexion().prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                client = new Client(rs.getInt("client_id"), rs.getString("nom_client"), rs.getInt("nombre_commandes"));
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return client;
+    }
 }

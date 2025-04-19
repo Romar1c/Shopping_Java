@@ -20,9 +20,9 @@ public class ConnexionBDD {
                 connexion = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
                 System.out.println("Connexion réussie à la base de données !");
             } catch (ClassNotFoundException e) {
-                System.out.println("🚨 Driver MySQL JDBC introuvable. Vérifie que le `.jar` est bien ajouté.");
+                System.out.println("Driver MySQL JDBC introuvable. Vérifie que le `.jar` est bien ajouté.");
             } catch (SQLException e) {
-                System.out.println("🚨 Erreur SQL : " + e.getMessage());
+                System.out.println("Erreur SQL : " + e.getMessage());
             }
         }
         return connexion;
@@ -32,7 +32,7 @@ public class ConnexionBDD {
         if (connexion != null) {
             try {
                 connexion.close();
-                System.out.println("✅ Connexion fermée !");
+                System.out.println("Connexion fermée !");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
