@@ -13,12 +13,12 @@ public class Test {
         frame.setLayout(new BorderLayout());
 
         String[][] donnees = {
-                {"Alice", "20", "Étudiante"},
-                {"Bob", "22", "Développeur"},
-                {"Charlie", "19", "Designer"},
-                {"David", "25", "Architecte"}
+                {"Alice", "20", "tttgggf"},
+                {"Bobmarleuy", "22", "Développeur"},
+                {"Charlie", "19", "DesignRROOOer rowwwwwwww"},
+                {"David", "257827", "TT"}
         };
-        String[] colonnes = {"Nom", "Age", "Profession"};
+        String[] colonnes = {"Nomtalia", "Age", "Profession"};
 
         JTable table = new JTable(donnees, colonnes);
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
@@ -29,7 +29,7 @@ public class Test {
         // Barre de recherche
         JPanel panelRecherche = new JPanel(new BorderLayout());
         JTextField champRecherche = new JTextField();
-        panelRecherche.add(new JLabel("Recherche : "), BorderLayout.WEST);
+        panelRecherche.add(new JLabel("RechercheR LA LISTE : "), BorderLayout.WEST);
         panelRecherche.add(champRecherche, BorderLayout.CENTER);
 
         // Quand on tape dans la barre de recherche
@@ -45,7 +45,7 @@ public class Test {
             }
         });
 
-        // Ajouter tout à la fenêtre
+        // Ajouter tout à la fenêtre et supprimer les trucs
         frame.add(panelRecherche, BorderLayout.NORTH);
         frame.add(scrollPane, BorderLayout.CENTER);
 
@@ -55,7 +55,7 @@ public class Test {
     // Fonction pour filtrer
     private static void rechercher(String texte, TableRowSorter<TableModel> sorter) {
         if (texte.trim().length() == 0) {
-            sorter.setRowFilter(null); // Pas de filtre
+            sorter.setRowFilter(null); // Pas de filtre POUR LA FONCTION
         } else {
             sorter.setRowFilter(RowFilter.regexFilter("(?i)" + texte)); // Filtre insensible à la casse
         }
