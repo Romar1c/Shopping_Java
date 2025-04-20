@@ -1,6 +1,7 @@
 package shop.vue;
 
 import shop.donnees.GestionClient;
+import shop.donnees.GestionCommande;
 import shop.modele.Client;
 
 import javax.swing.*;
@@ -11,9 +12,11 @@ import java.util.ArrayList;
 
 public class FenetreStats extends JFrame {
     private GestionClient gestionclient;
+    private GestionCommande gestioncommande;
+
     public FenetreStats() {
         gestionclient = new GestionClient();
-
+        gestioncommande = new GestionCommande();
 
 
         setTitle("Statistique");
@@ -74,10 +77,25 @@ public class FenetreStats extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Center.removeAll();
 
-                JLabel label = new JLabel("Commande");
-                Center.add(label);
+                Center.setLayout(new GridLayout(3, 2));
 
+                JLabel PrixMoyen = new JLabel("Prix moyen du panier: ");
+                Center.add(PrixMoyen);
 
+                double moyen = gestioncommande.MoyennePrix();
+                Center.add(new JTextArea(String.valueOf(moyen)));
+
+                JLabel PanierMax = new JLabel("Panier le plus chere: ");
+                Center.add(PanierMax);
+
+                double max = gestioncommande.PlusChere();
+                Center.add(new JTextArea(String.valueOf(max)));
+
+                JLabel NbrCommande = new JLabel("Nombre de commande: ");
+                Center.add(NbrCommande);
+
+                int NbrCommandes = gestioncommande.NbrCommandes();
+                Center.add(new JTextArea(String.valueOf(NbrCommandes)));
 
                 Center.revalidate();
                 Center.repaint();

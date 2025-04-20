@@ -1,5 +1,6 @@
 package shop.donnees;
 
+import shop.modele.Client;
 import shop.modele.Commande;
 import shop.modele.Article;
 import shop.ConnexionBDD;
@@ -85,7 +86,6 @@ public class GestionCommande {
         }
     }
 
-
     // Supprimer une commande
     public void supprimerCommande(int id) {
         String sql = "DELETE FROM commandes WHERE id = ?";
@@ -164,5 +164,52 @@ public class GestionCommande {
             e.printStackTrace();
         }
         return commandes;
+    }
+
+    public double MoyennePrix(){
+        String sql = "SELECT AVG(total) AS moyen FROM commandes;";
+        double moyenne = 0;
+
+        try (PreparedStatement stmt = ConnexionBDD.getConnexion().prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                moyenne = rs.getDouble("moyen");
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return moyenne;
+    }
+
+    public double PlusChere(){
+        double plusChere = 0;
+        String sql = "SELECT total FROM `commandes` ORDER BY total DESC LIMIT 1;";
+        try (PreparedStatement stmt = ConnexionBDD.getConnexion().prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                plusChere = rs.getDouble("total");
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return plusChere;
+    }
+
+    public int NbrCommandes() {
+        int commandes = 0;
+        String sql = "SELECT COUNT(*) AS nbrcommandes FROM commandes;";
+        try (PreparedStatement stmt = ConnexionBDD.getConnexion().prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                commandes = rs.getInt("nbrcommandes");
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return commandes;
+
     }
 }
