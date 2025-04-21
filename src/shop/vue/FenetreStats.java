@@ -1,5 +1,10 @@
 package shop.vue;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
+import shop.donnees.GestionArticle;
 import shop.donnees.GestionClient;
 import shop.donnees.GestionCommande;
 import shop.modele.Client;
@@ -13,11 +18,12 @@ import java.util.ArrayList;
 public class FenetreStats extends JFrame {
     private GestionClient gestionclient;
     private GestionCommande gestioncommande;
+    private GestionArticle gestionarticle;
 
     public FenetreStats() {
         gestionclient = new GestionClient();
         gestioncommande = new GestionCommande();
-
+        gestionarticle = new GestionArticle();
 
         setTitle("Statistique");
         setSize(1000, 600);
@@ -107,8 +113,27 @@ public class FenetreStats extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Center.removeAll();
 
-                JLabel label = new JLabel("Article");
-                Center.add(label);
+                DefaultCategoryDataset ArtEur = gestionarticle.DataSetArtEur();
+                JFreeChart BarArtEur = ChartFactory.createBarChart(
+                        "Revenu total par article",
+                        "Article",
+                        "Revenu (€)",
+                        ArtEur
+                );
+
+                ChartPanel EurParArt = new ChartPanel(BarArtEur);
+                Center.add(EurParArt);
+
+                DefaultCategoryDataset ArtUnit = gestionarticle.DataSetArtUnit();
+                JFreeChart BarArtUnit = ChartFactory.createBarChart(
+                        "Unites Vendues par article",
+                        "Article",
+                        "Unites Vendues",
+                        ArtUnit
+                );
+
+                ChartPanel UnitParArt = new ChartPanel(BarArtUnit);
+                Center.add(UnitParArt);
 
                 Center.revalidate();
                 Center.repaint();
@@ -120,8 +145,26 @@ public class FenetreStats extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Center.removeAll();
 
-                JLabel label = new JLabel("Financier");
-                Center.add(label);
+                Center.setLayout(new GridLayout(3, 2));
+
+                JLabel CaTotal = new JLabel("Chiffre d'affaire total: ");
+                Center.add(CaTotal);
+
+                double ArgTot = gestioncommande.ArgentTotal();
+                Center.add(new JTextArea(String.valueOf(ArgTot)));
+
+                JLabel CaTotSsReduc = new JLabel("Chiffre d'affaire total (si pas de reduc): ");
+                Center.add(CaTotSsReduc);
+
+                double ArgTotSsReduc = gestioncommande.ArgentPotentiel();
+                Center.add(new JTextArea(String.valueOf(ArgTotSsReduc)));
+
+                JLabel PrcReduc = new JLabel("Pourcentage de reduction effectue au global: ");
+                Center.add(PrcReduc);
+
+                double reduction = ((ArgTotSsReduc - ArgTot)/ArgTotSsReduc) * 100;
+                String ReducTxt = String.format("%.2f%%", reduction);
+                Center.add(new JTextArea(ReducTxt));
 
                 Center.revalidate();
                 Center.repaint();

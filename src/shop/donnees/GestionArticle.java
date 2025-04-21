@@ -1,5 +1,6 @@
 package shop.donnees;
 
+import org.jfree.data.category.DefaultCategoryDataset;
 import shop.modele.Article;
 import shop.ConnexionBDD;
 
@@ -134,5 +135,46 @@ public class GestionArticle {
         else{
             return false;
         }
+    }
+
+    public DefaultCategoryDataset DataSetArtEur() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        String sql = "SELECT a.nom, SUM(ca.prix_total) AS revenutotal " +
+                "FROM commande_articles ca " +
+                "JOIN articles a ON a.id = ca.article_id " +
+                "GROUP BY a.nom";
+
+        try (PreparedStatement stmt = ConnexionBDD.getConnexion().prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                String nomArticle = rs.getString("nom");
+                double revenu = rs.getDouble("revenutotal");
+                dataset.addValue(revenu, "Argent Genere", nomArticle);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dataset;
+    }
+
+    public DefaultCategoryDataset DataSetArtUnit() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        String sql = "SELECT a.nom, SUM(ca.quantite) AS unitesvendues\n" +
+                "FROM commande_articles ca\n" +
+                "JOIN articles a ON a.id = ca.article_id\n" +
+                "GROUP BY a.nom";
+
+        try (PreparedStatement stmt = ConnexionBDD.getConnexion().prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                String nomArticle = rs.getString("nom");
+                double revenu = rs.getDouble("unitesvendues");
+                dataset.addValue(revenu, "Unites Vendues", nomArticle);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dataset;
     }
 }

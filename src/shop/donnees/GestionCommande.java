@@ -210,6 +210,38 @@ public class GestionCommande {
             e.printStackTrace();
         }
         return commandes;
+    }
 
+    public double ArgentPotentiel(){
+        double argentPotentiel = 0;
+        String sql = "SELECT SUM(ca.quantite * a.prix_unitaire) AS PotentielTotal\n" +
+                "FROM commande_articles AS ca\n" +
+                "JOIN articles AS a ON ca.article_id = a.id;";
+        try (PreparedStatement stmt = ConnexionBDD.getConnexion().prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                argentPotentiel = rs.getDouble("PotentielTotal");
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return argentPotentiel;
+    }
+
+    public double ArgentTotal(){
+        double total = 0;
+        String sql = "SELECT SUM(prix_total) AS ArgentTotal\n" +
+                "FROM commande_articles;";
+        try (PreparedStatement stmt = ConnexionBDD.getConnexion().prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                total = rs.getDouble("ArgentTotal");
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return total;
     }
 }
