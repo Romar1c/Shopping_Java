@@ -16,11 +16,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class FenetreStats extends JFrame {
+    private int clientId;
     private GestionClient gestionclient;
     private GestionCommande gestioncommande;
     private GestionArticle gestionarticle;
 
-    public FenetreStats() {
+    public FenetreStats(int clientId) {
+        this.clientId = clientId;
         gestionclient = new GestionClient();
         gestioncommande = new GestionCommande();
         gestionarticle = new GestionArticle();
@@ -29,6 +31,7 @@ public class FenetreStats extends JFrame {
         setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        JButton retour = new JButton("Retour");
         add(new JLabel("Statistique"), BorderLayout.NORTH);
 
         JPanel principal = new JPanel();
@@ -40,6 +43,7 @@ public class FenetreStats extends JFrame {
         JButton ButtonArticle =  new JButton("Article");
         JButton ButtonFinancier =  new JButton("Financier");
 
+        North.add(retour);
         North.add(ButtonClient);
         North.add(ButtonCommande);
         North.add(ButtonArticle);
@@ -89,7 +93,8 @@ public class FenetreStats extends JFrame {
                 Center.add(PrixMoyen);
 
                 double moyen = gestioncommande.MoyennePrix();
-                Center.add(new JTextArea(String.valueOf(moyen)));
+                String Pmoyen = String.format("%.2f", moyen);
+                Center.add(new JTextArea(Pmoyen));
 
                 JLabel PanierMax = new JLabel("Panier le plus chere: ");
                 Center.add(PanierMax);
@@ -171,6 +176,14 @@ public class FenetreStats extends JFrame {
             }
         });
 
+        retour.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FenetreAdmin(clientId);
+                dispose();
+            }
+        });
+
         principal.add(North, BorderLayout.NORTH);
         principal.add(Center, BorderLayout.CENTER);
 
@@ -180,6 +193,6 @@ public class FenetreStats extends JFrame {
 
     }
     public static void main(String[] args) {
-        new FenetreStats();
+        new FenetreStats(1);
     }
 }
