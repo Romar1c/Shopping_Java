@@ -25,8 +25,8 @@ public class FenetreInventaire extends JFrame {
         this.commandeControleur = new CommandeControleur();
 
         setTitle("Inventaire");
+        setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
         setLocationRelativeTo(null);
 
         setLayout(new BorderLayout());

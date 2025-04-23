@@ -20,8 +20,9 @@ public class FenetreCommandes extends JFrame {
         commandeControleur = new CommandeControleur();
 
         setTitle("Commandes client " + clientId);
-        setSize(800, 600);
+        setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
         // Tableau des commandes du client avec prix total par article

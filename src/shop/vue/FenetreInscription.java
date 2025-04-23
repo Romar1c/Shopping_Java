@@ -17,10 +17,10 @@ public class FenetreInscription extends JFrame {
         clientControleur = new ClientControleur();
 
         setTitle("Inscription Client");
-        setSize(300, 200);
+        setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
         setLocationRelativeTo(null);
+        setLayout(null);
 
         JLabel nomLabel = new JLabel("Nom:");
         nomLabel.setBounds(10, 10, 100, 20);

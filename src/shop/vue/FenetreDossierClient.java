@@ -26,8 +26,8 @@ public class FenetreDossierClient extends JFrame {
         this.gestionClient = new GestionClient();
 
         setTitle("Liste Client");
+        setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
         setLocationRelativeTo(null);
 
         setLayout(new BorderLayout());

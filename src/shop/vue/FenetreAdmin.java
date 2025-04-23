@@ -22,6 +22,7 @@ public class FenetreAdmin extends JFrame {
         setTitle("Pannel Admin");
         setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setLayout(new GridLayout(2, 2));
 
         utilisateurControleur = new UtilisateurControleur();

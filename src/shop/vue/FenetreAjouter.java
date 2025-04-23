@@ -20,8 +20,9 @@ public class FenetreAjouter extends JFrame {
     public FenetreAjouter(int clientId) {
         articleControleur = new ArticleControleur();
         setTitle("Ajouter un Article");
-        setSize(800, 600);
+        setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
 

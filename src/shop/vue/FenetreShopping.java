@@ -31,6 +31,7 @@ public class FenetreShopping extends JFrame {
         setTitle("Shopping - Client ID: " + clientId);
         setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
         // Tableau des articles disponibles

@@ -17,10 +17,10 @@ public class FenetreConnexion extends JFrame {
     public FenetreConnexion() {
         utilisateurControleur = new UtilisateurControleur();
         setTitle("Connexion");
-        setSize(400, 250);
+        setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(3, 2));
         setLocationRelativeTo(null);
+        setLayout(new GridLayout(3, 2));
 
         // Champs de saisie
         add(new JLabel("Email: "));
