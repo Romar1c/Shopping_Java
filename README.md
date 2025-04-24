@@ -55,7 +55,7 @@ shop/
   - Miguel FRANCIS
   - Julia EZZEDINE
   - Romaric BARBAUD
-  - dans le cadre de notre projet de Java de première année du cycle d'ingénieur
+- Projet réalisé dans le cadre de notre projet de Java de première année du cycle d'ingénieur
 
 ---
 
