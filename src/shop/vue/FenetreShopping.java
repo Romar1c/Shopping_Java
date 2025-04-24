@@ -128,10 +128,16 @@ public class FenetreShopping extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!panier.isEmpty()) {
-                    commandeControleur.ajouterCommande(clientId, panier);
+                    boolean value = commandeControleur.ajouterCommande(clientId, panier);
+                    System.out.println(value);
+                    if(value){
+                        JOptionPane.showMessageDialog(null, "Commande validée avec succès !");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Certains article de la commande ne sont pas disponible dans la quantite demande.");
+                    }
                     panier.clear();
                     rafraichirPanier();
-                    JOptionPane.showMessageDialog(null, "Commande validée avec succès !");
                 } else {
                     JOptionPane.showMessageDialog(null, "Votre panier est vide !");
                 }

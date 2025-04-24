@@ -18,6 +18,14 @@ public class Commande {
         this.articles = articles;
     }
 
+    public Commande(Commande commande) {
+        this.id = commande.getId();
+        this.clientId = commande.getClientId();
+        this.dateCommande = commande.getDateCommande();
+        this.total = commande.getTotal();
+        this.articles = commande.getArticles();
+    }
+
     // Getters
     public int getId() { return id; }
     public int getClientId() { return clientId; }

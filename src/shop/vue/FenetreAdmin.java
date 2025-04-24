@@ -2,14 +2,10 @@ package shop.vue;
 
 import shop.controleur.CommandeControleur;
 import shop.controleur.UtilisateurControleur;
-import shop.modele.Article;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
 
 public class FenetreAdmin extends JFrame {
     int cliendId;
@@ -19,47 +15,57 @@ public class FenetreAdmin extends JFrame {
 
     public FenetreAdmin(int clientId) {
         this.cliendId = clientId;
-        setTitle("Pannel Admin");
+        setTitle("Panneau Admin");
         setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(new GridLayout(2, 2));
 
-        utilisateurControleur = new UtilisateurControleur();
-        nomField = new JLabel(utilisateurControleur.getUsername(cliendId));
-        add(nomField);
+        setLayout(new BorderLayout());
+        JPanel header = new JPanel(new BorderLayout());
+        nomField = new JLabel("Connecte en tant que : " + new UtilisateurControleur().getUsername(cliendId), SwingConstants.CENTER);
+        header.add(nomField, BorderLayout.CENTER);
+        add(header, BorderLayout.NORTH);
+
+        JPanel center = new JPanel(new GridBagLayout());
+        JPanel content = new JPanel();
+        content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
 
         inventaireButton = new JButton("Inventaire");
-        add(inventaireButton);
-
         clientButton = new JButton("Client");
-        add(clientButton);
+        statsButton = new JButton("Statistiques");
 
-        statsButton = new JButton("Stats");
-        add(statsButton);
+        Dimension buttonSize = new Dimension(250, 60);
+        inventaireButton.setPreferredSize(buttonSize);
+        clientButton.setPreferredSize(buttonSize);
+        statsButton.setPreferredSize(buttonSize);
 
-        inventaireButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new FenetreInventaire(clientId);
-                dispose();
-            }
+        inventaireButton.setMaximumSize(buttonSize);
+        clientButton.setMaximumSize(buttonSize);
+        statsButton.setMaximumSize(buttonSize);
+
+        content.add(Box.createVerticalStrut(15));
+        content.add(inventaireButton);
+        content.add(Box.createVerticalStrut(15));
+        content.add(clientButton);
+        content.add(Box.createVerticalStrut(15));
+        content.add(statsButton);
+
+        center.add(content);
+        add(center, BorderLayout.CENTER);
+
+        inventaireButton.addActionListener((ActionEvent e) -> {
+            new FenetreInventaire(clientId);
+            dispose();
         });
 
-        clientButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new FenetreDossierClient(clientId);
-                dispose();
-            }
+        clientButton.addActionListener((ActionEvent e) -> {
+            new FenetreDossierClient(clientId);
+            dispose();
         });
 
-        statsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new FenetreStats(clientId);
-                dispose();
-            }
+        statsButton.addActionListener((ActionEvent e) -> {
+            new FenetreStats(clientId);
+            dispose();
         });
 
         setVisible(true);

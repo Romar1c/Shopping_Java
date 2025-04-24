@@ -17,7 +17,7 @@ public class GestionCommande {
     }
 
     public Commande VerifCommande(Commande commande) {
-        Commande commandeVerif = commande;
+        Commande commandeVerif = new Commande(commande);
         List<Article> ListArticleVerif = new ArrayList<>();
         GestionArticle gestionArticle = new GestionArticle();
 

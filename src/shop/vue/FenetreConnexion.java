@@ -17,7 +17,7 @@ public class FenetreConnexion extends JFrame {
     public FenetreConnexion() {
         utilisateurControleur = new UtilisateurControleur();
         setTitle("Connexion");
-        setSize(1000, 600);
+        setSize(400, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new GridLayout(3, 2));

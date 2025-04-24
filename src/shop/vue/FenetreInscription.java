@@ -17,7 +17,7 @@ public class FenetreInscription extends JFrame {
         clientControleur = new ClientControleur();
 
         setTitle("Inscription Client");
-        setSize(1000, 600);
+        setSize(300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);

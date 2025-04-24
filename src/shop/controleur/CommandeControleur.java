@@ -20,13 +20,20 @@ public class CommandeControleur {
     }
 
     // Ajouter une commande
-    public void ajouterCommande(int clientId, List<Article> articles) {
+    public boolean ajouterCommande(int clientId, List<Article> articles) {
         double PrixTotal = articles.stream().mapToDouble(Article::getPrixTotal).sum();
 
         Commande commande = new Commande(0, clientId, new Date(), PrixTotal, articles);
         Commande commandeVerif = gestionCommande.VerifCommande(commande);
 
         gestionCommande.ajouterCommande(commandeVerif);
+        System.out.println(commande.getArticles().size());
+        System.out.println(commandeVerif.getArticles().size());
+
+        if(commande.getArticles().size() != commandeVerif.getArticles().size()) {
+            return false;
+        }
+        return true;
     }
 
     // Supprimer une commande
