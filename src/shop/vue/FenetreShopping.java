@@ -107,12 +107,14 @@ public class FenetreShopping extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = tableArticles.getSelectedRow();
                 if (selectedRow != -1) {
-                    int articleId = (int) modelArticles.getValueAt(selectedRow, 0);
-                    String nom = (String) modelArticles.getValueAt(selectedRow, 1);
-                    String marque = (String) modelArticles.getValueAt(selectedRow, 2);
-                    double prix = (double) modelArticles.getValueAt(selectedRow, 3);
-                    int quantiteVrac = (int) modelArticles.getValueAt(selectedRow, 4);
-                    double prixVrac = (double) modelArticles.getValueAt(selectedRow, 5);
+                    int modelRow = tableArticles.convertRowIndexToModel(selectedRow);
+
+                    int articleId = (int) modelArticles.getValueAt(modelRow, 0);
+                    String nom = (String) modelArticles.getValueAt(modelRow, 1);
+                    String marque = (String) modelArticles.getValueAt(modelRow, 2);
+                    double prix = (double) modelArticles.getValueAt(modelRow, 3);
+                    int quantiteVrac = (int) modelArticles.getValueAt(modelRow, 4);
+                    double prixVrac = (double) modelArticles.getValueAt(modelRow, 5);
 
                     int quantite = Integer.parseInt(quantiteField.getText());
 
