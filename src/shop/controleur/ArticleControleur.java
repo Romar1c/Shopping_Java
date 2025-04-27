@@ -4,9 +4,17 @@ import shop.donnees.GestionArticle;
 import shop.modele.Article;
 import java.util.List;
 
+/**
+ * Controleur permettant de gerer les operations relatives aux articles.
+ * Cette classe contient des methodes pour ajouter, supprimer, modifier et rechercher des articles.
+ */
 public class ArticleControleur {
     private GestionArticle gestionArticle;
 
+    /**
+     * Constructeur de la classe ArticleControleur.
+     * Initialise l'instance de GestionArticle pour la gestion des articles.
+     */
     public ArticleControleur() {
         this.gestionArticle = new GestionArticle();
     }

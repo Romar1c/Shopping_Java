@@ -14,6 +14,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * FenetreShopping est une classe qui represente l'interface graphique d'un client pour passer une commande
+ * dans une boutique en ligne. Elle permet de visualiser les articles disponibles, de les ajouter au panier,
+ * et de valider une commande.
+ */
+
 public class FenetreShopping extends JFrame {
     private CommandeControleur commandeControleur;
     private JTable tableArticles, tablePanier;
@@ -23,6 +29,12 @@ public class FenetreShopping extends JFrame {
     private List<Article> panier;
     private int clientId;
 
+    /**
+     * Constructeur de la fenetre de shopping.
+     * Initialise les composants graphiques et les actions des boutons.
+     *
+     * @param clientId L'ID du client qui effectue l'achat.
+     */
     public FenetreShopping(int clientId) {
         this.clientId = clientId;
         this.commandeControleur = new CommandeControleur();

@@ -1,5 +1,11 @@
 package shop.modele;
 
+/**
+ * La classe Article represente un article dans le systeme de gestion de boutique.
+ * Elle contient des informations sur l'article telles que son identifiant, son nom,
+ * sa marque, son prix unitaire, son prix en vrac, sa quantite en vrac, son stock,
+ * ainsi que la quantite de l'article actuellement en panier.
+ */
 public class Article {
     private int id;
     private String nom;
@@ -10,6 +16,17 @@ public class Article {
     private int stock;
     private int quantite;
 
+    /**
+     * Constructeur pour initialiser un article avec toutes les informations de base,
+     * y compris son stock et sa quantite en vrac.
+     * @param id L'id de l'article.
+     * @param nom Le nom de l'article.
+     * @param marque La marque de l'article.
+     * @param prixUnitaire Le prix unitaire de l'article.
+     * @param prixVrac Le prix de l'article en vrac.
+     * @param quantiteVrac La quantite d'unité en vrac de l'article.
+     * @param stock Le stock disponible de l'article.
+     */
     public Article(int id, String nom, String marque, double prixUnitaire, double prixVrac, int quantiteVrac, int stock) {
         this.id = id;
         this.nom = nom;
@@ -20,6 +37,18 @@ public class Article {
         this.stock = stock;
     }
 
+    /**
+     * Constructeur pour initialiser un article avec toutes les informations de base,
+     * y compris la quantite achetee et stock disponible.
+     * @param id L'id de l'article.
+     * @param nom Le nom de l'article.
+     * @param marque La marque de l'article.
+     * @param prixUnitaire Le prix unitaire de l'article.
+     * @param prixVrac Le prix de l'article en vrac.
+     * @param quantiteVrac La quantite d'unité en vrac de l'article.
+     * @param stock Le stock disponible de l'article.
+     * @param quantite La quantite achetee de l'article.
+     */
     public Article(int id, String nom, String marque, double prixUnitaire, double prixVrac, int quantiteVrac, int stock, int quantite) {
         this.id = id;
         this.nom = nom;

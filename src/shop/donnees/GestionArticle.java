@@ -11,9 +11,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe permettant la gestion des articles dans l'application.
+ * Cette classe permet d'ajouter, supprimer, modifier, rechercher et verifier la disponibilite des articles.
+ * Elle permet aussi de generer des jeux de donnees pour l'analyse des revenus et des ventes.
+ */
 public class GestionArticle {
     private Connection connexion;
 
+    /**
+     * Constructeur de la classe GestionArticle. Il initialise la connexion a la base de donnees.
+     */
     public GestionArticle() {
         this.connexion = ConnexionBDD.getConnexion();
     }
@@ -90,6 +98,12 @@ public class GestionArticle {
         return articles;
     }
 
+    /**
+     * Recherche un article par son ID.
+     *
+     * @param id L'ID de l'article chercher.
+     * @return Une liste contenant l'article correspondant.
+     */
     public List<Article> rechercherArticles(int id) {
         List<Article> articles = new ArrayList<>();
         String sql = "SELECT * FROM articles WHERE id = ?";
@@ -113,6 +127,12 @@ public class GestionArticle {
         return articles;
     }
 
+    /**
+     * Verifie la disponibilite d'un article en comparant son stock avec le stock requis.
+     *
+     * @param article L'article a verifier.
+     * @return true si l'article est disponible, false sinon.
+     */
     public boolean VerifierDisponibiliteArticle(Article article) {
         int stock = article.getStock();
         int idArticle = article.getId();
@@ -137,6 +157,11 @@ public class GestionArticle {
         }
     }
 
+    /**
+     * Genere un dataset pour l'analyse des revenus par article.
+     *
+     * @return Un objet DefaultCategoryDataset contenant les revenus par article.
+     */
     public DefaultCategoryDataset DataSetArtEur() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         String sql = "SELECT a.nom, SUM(ca.prix_total) AS revenutotal " +
@@ -157,6 +182,11 @@ public class GestionArticle {
         return dataset;
     }
 
+    /**
+     * Genere un dataset pour l'analyse des quantites d'articles vendus.
+     *
+     * @return Un objet DefaultCategoryDataset contenant les quantites vendues par article.
+     */
     public DefaultCategoryDataset DataSetArtUnit() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         String sql = "SELECT a.nom, SUM(ca.quantite) AS unitesvendues\n" +

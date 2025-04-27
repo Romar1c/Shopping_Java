@@ -7,6 +7,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * FenetreConnexion est une classe permettant a un utilisateur de se connecter avec son email et mot de passe.
+ * Elle permet aussi de s'inscrire en creant un compte si l'utilisateur n'en a pas encore.
+ */
 public class FenetreConnexion extends JFrame {
     private JTextField emailField;
     private JPasswordField passwordField;
@@ -14,6 +18,10 @@ public class FenetreConnexion extends JFrame {
     private JButton registerButton;
     private UtilisateurControleur utilisateurControleur;
 
+    /**
+     * Constructeur de la fenetre de connexion.
+     * Initialise les composants graphiques et permet a l'utilisateur de se connecter ou de s'inscrire.
+     */
     public FenetreConnexion() {
         utilisateurControleur = new UtilisateurControleur();
         setTitle("Connexion");

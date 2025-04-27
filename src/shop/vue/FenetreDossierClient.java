@@ -15,12 +15,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * FenetreDossierClient est une classe qui represente l'interface graphique pour afficher la liste des clients.
+ * Elle permet de visualiser les informations des clients et d'acceder aux details de leurs commandes.
+ */
 public class FenetreDossierClient extends JFrame {
     private int clientId;
     private GestionClient gestionClient;
     private DefaultTableModel modelArticles;
     private JTable tableArticles;
 
+    /**
+     * Constructeur de la fenetre du dossier client.
+     * Initialise les composants graphiques et affiche la liste des clients.
+     * @param clientId L'ID de l'admin actuellement connecte.
+     */
     public FenetreDossierClient(int clientId) {
         this.clientId = clientId;
         this.gestionClient = new GestionClient();
@@ -74,6 +83,10 @@ public class FenetreDossierClient extends JFrame {
 
         setVisible(true);
     }
+
+    /**
+     * ButtonRenderer est une classe interne qui permet d'afficher un bouton dans la colonne "Details" de la table.
+     */
     class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer() {
             setOpaque(true);
@@ -84,6 +97,9 @@ public class FenetreDossierClient extends JFrame {
         }
     }
 
+    /**
+     * ButtonEditor est une classe interne qui permet de creer un bouton cliquable dans la table pour afficher les details.
+     */
     class ButtonEditor extends DefaultCellEditor {
         private JButton button;
         private String label;

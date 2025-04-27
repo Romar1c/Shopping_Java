@@ -10,13 +10,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe permettant la gestion des clients dans l'application.
+ * Cette classe permet d'ajouter un client, de recuperer la liste des clients,
+ * ainsi que de trouver les clients les plus fideles selon leurs depenses ou le nombre de commandes.
+ */
 public class GestionClient {
     private Connection connexion;
 
+    /**
+     * Constructeur de la classe GestionClient. Il initialise la connexion a la base de donnees.
+     */
     public GestionClient() {
         this.connexion = ConnexionBDD.getConnexion();
     }
 
+    /**
+     * Ajoute un client a la base de donnees si son email n'est pas deja utilise.
+     *
+     * @param client Le client a ajouter.
+     * @return 1 si le client a ete ajoute avec succes, 0 si l'email est deja utilise.
+     * @throws SQLException Si une erreur se produit lors de l'execution de la requete SQL.
+     */
     public int ajouterClient(Client client) throws SQLException {
         int count = 0;
         String sql_verif = "SELECT COUNT(*) FROM `clients` WHERE email = (?);";
@@ -46,6 +61,12 @@ public class GestionClient {
         }
         return 0;
     }
+
+    /**
+     * Recuperer la liste de tous les clients non-admins.
+     *
+     * @return La liste des clients.
+     */
     public List<Client> getClients(){
         List<Client> clients = new ArrayList<>();
 
@@ -66,6 +87,11 @@ public class GestionClient {
         return clients;
     }
 
+    /**
+     * Trouve le client ayant depense le plus d'argent dans toutes ses commandes.
+     *
+     * @return Le client ayant depense le plus d'argent.
+     */
     public Client FideleEur(){
         Client client = null;
 
@@ -89,6 +115,11 @@ public class GestionClient {
         return client;
     }
 
+    /**
+     * Trouve le client ayant passe le plus grand nombre de commandes.
+     *
+     * @return Le client ayant passe le plus grand nombre de commandes.
+     */
     public Client FideleCommande(){
         Client client = null;
         String sql = "SELECT c.id AS client_id, c.nom AS nom_client, COUNT(co.id) AS nombre_commandes\n" +

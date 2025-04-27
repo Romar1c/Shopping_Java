@@ -14,6 +14,10 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * FenetreDetail est une classe qui permet d'afficher les details d'un article particulier dans l'inventaire.
+ * Elle offre aussi des options pour modifier ou supprimer un article.
+ */
 public class FenetreDetail extends JFrame {
     GestionArticle gestionArticle;
     Article article;

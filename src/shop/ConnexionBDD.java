@@ -4,6 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Class permettant de se connecter a la BDD.
+ *
+ * Elle est utilise a chaque fois que l'on a besoin de se connecter a la BDD.
+ *
+ */
 public class ConnexionBDD {
     private static final String URL = "jdbc:mysql://localhost:3306/shopping_db";
     private static final String UTILISATEUR = "root";  // Change si ton utilisateur est différent

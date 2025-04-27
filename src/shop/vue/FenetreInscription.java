@@ -7,12 +7,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+/**
+ * FenetreInscription est une classe qui represente l'interface graphique pour l'inscription d'un client.
+ * Elle permet de saisir le nom, l'email, et le mot de passe, puis de s'inscrire.
+ */
 public class FenetreInscription extends JFrame {
     private JTextField nomField, emailField;
     private JPasswordField passwordField;
     private JButton inscrireButton, retourButton;
     private ClientControleur clientControleur;
 
+    /**
+     * Constructeur de la fenetre d'inscription.
+     * Initialise les composants graphiques, les actions des boutons et traite l'inscription du client.
+     */
     public FenetreInscription() {
         clientControleur = new ClientControleur();
 

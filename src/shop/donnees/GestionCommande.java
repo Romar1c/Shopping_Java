@@ -9,13 +9,26 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * La classe GestionCommande permet de gerer les operations sur les commandes dans le systeme de gestion de boutique.
+ * Elle permet d'ajouter, supprimer et rechercher des commandes, ainsi que de calculer diverses statistiques sur les commandes.
+ */
 public class GestionCommande {
     private Connection connexion;
 
+    /**
+     * Constructeur de la classe GestionCommande.
+     * Initialise la connexion a la base de donnees.
+     */
     public GestionCommande() {
         this.connexion = ConnexionBDD.getConnexion();
     }
 
+    /**
+     * Verifie une commande en fonction de la disponibilite des articles.
+     * @param commande La commande a verifier.
+     * @return La commande verifiee avec les articles disponibles et le total recalcule.
+     */
     public Commande VerifCommande(Commande commande) {
         Commande commandeVerif = new Commande(commande);
         List<Article> ListArticleVerif = new ArrayList<>();
@@ -166,6 +179,10 @@ public class GestionCommande {
         return commandes;
     }
 
+    /**
+     * Calcule la moyenne du prix des commandes.
+     * @return La moyenne du prix des commandes.
+     */
     public double MoyennePrix(){
         String sql = "SELECT AVG(total) AS moyen FROM commandes;";
         double moyenne = 0;
@@ -182,6 +199,10 @@ public class GestionCommande {
         return moyenne;
     }
 
+    /**
+     * Trouve le prix de la commande la plus chere.
+     * @return Le prix de la commande la plus chere.
+     */
     public double PlusChere(){
         double plusChere = 0;
         String sql = "SELECT total FROM `commandes` ORDER BY total DESC LIMIT 1;";
@@ -197,6 +218,10 @@ public class GestionCommande {
         return plusChere;
     }
 
+    /**
+     * Calcule le nombre total de commandes.
+     * @return Le nombre total de commandes.
+     */
     public int NbrCommandes() {
         int commandes = 0;
         String sql = "SELECT COUNT(*) AS nbrcommandes FROM commandes;";
@@ -212,6 +237,10 @@ public class GestionCommande {
         return commandes;
     }
 
+    /**
+     * Calcule l'argent totale que l'on aurait pu gagner si les commandes passees n'avait pas de reduc.
+     * @return Le montant total potentiel.
+     */
     public double ArgentPotentiel(){
         double argentPotentiel = 0;
         String sql = "SELECT SUM(ca.quantite * a.prix_unitaire) AS PotentielTotal\n" +
@@ -229,6 +258,10 @@ public class GestionCommande {
         return argentPotentiel;
     }
 
+    /**
+     * Calcule le montant total des ventes.
+     * @return Le montant total des ventes.
+     */
     public double ArgentTotal(){
         double total = 0;
         String sql = "SELECT SUM(prix_total) AS ArgentTotal\n" +

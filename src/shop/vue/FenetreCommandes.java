@@ -11,12 +11,21 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.List;
 
+
+/**
+ * FenetreCommandes est une classe permettant d'afficher la liste des commandes d'un client.
+ * Chaque commande contient des informations sur les articles achetes, leur quantite et le prix total.
+ */
 public class FenetreCommandes extends JFrame {
     private CommandeControleur commandeControleur;
     private JTable table;
     private DefaultTableModel tableModel;
     private int clientId;
 
+    /**
+     * Constructeur de la fenetre des commandes du client.
+     * @param clientId L'identifiant du client dont les commandes doivent etre affichees.
+     */
     public FenetreCommandes(int clientId) {
         this.clientId = clientId;
         commandeControleur = new CommandeControleur();

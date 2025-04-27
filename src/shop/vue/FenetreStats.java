@@ -14,12 +14,25 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * FenetreStats est la classe affichant une fenetre pour statistiques
+ * relatives a un client, des commandes, des articles, et des donnees financieres.
+ * Elle herite de la classe JFrame pour la gestion de la fenetre principale.
+ */
+
 public class FenetreStats extends JFrame {
     private int clientId;
     private GestionClient gestionclient;
     private GestionCommande gestioncommande;
     private GestionArticle gestionarticle;
     private JPanel cards;
+
+    /**
+     * Constructeur de la fenetre des statistiques. Il initialise les composants et affiche les differentes sections
+     * liees aux stats.
+     *
+     * @param clientId Permet de faire des retours vers la page admin ainsi que d'identifier l'administrateur actuel.
+     */
 
     public FenetreStats(int clientId) {
         this.clientId = clientId;
@@ -89,6 +102,11 @@ public class FenetreStats extends JFrame {
         cl.show(cards, name);
     }
 
+    /**
+     * Cree et retourne le panneau de statistiques sur les clients.
+     *
+     * @return Le panneau affichant des informations sur les clients.
+     */
     private JPanel createPanelClient() {
         JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(30, 100, 30, 100));
@@ -104,6 +122,11 @@ public class FenetreStats extends JFrame {
         return panel;
     }
 
+    /**
+     * Cree et retourne le panneau de statistiques sur les commandes.
+     *
+     * @return Le panneau affichant des informations sur les commandes.
+     */
     private JPanel createPanelCommande() {
         JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(30, 100, 30, 100));
@@ -119,6 +142,11 @@ public class FenetreStats extends JFrame {
         return panel;
     }
 
+    /**
+     * Cree et retourne le panneau de statistiques sur les articles.
+     *
+     * @return Le panneau affichant des informations sur les articles.
+     */
     private JPanel createPanelArticle() {
         JPanel panel = new JPanel(new GridLayout(1, 2));
         DefaultCategoryDataset ArtEur = gestionarticle.DataSetArtEur();
@@ -134,6 +162,11 @@ public class FenetreStats extends JFrame {
         return panel;
     }
 
+    /**
+     * Cree et retourne le panneau de statistiques financières.
+     *
+     * @return Le panneau affichant des informations financières.
+     */
     private JPanel createPanelFinancier() {
         JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(30, 100, 30, 100));

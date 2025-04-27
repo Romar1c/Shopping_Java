@@ -7,12 +7,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * FenetreAdmin est une classe qui permet d'afficher le panneau admin.
+ * L'admin peut acceder à l'inventaire, la liste des clients, et aux statistiques.
+ */
 public class FenetreAdmin extends JFrame {
     int cliendId;
     private JLabel nomField;
     private JButton inventaireButton, clientButton, statsButton;
     private UtilisateurControleur utilisateurControleur;
 
+    /**
+     * Constructeur de la fenetre admin.
+     * @param clientId L'identifiant de l'admin.
+     */
     public FenetreAdmin(int clientId) {
         this.cliendId = clientId;
         setTitle("Panneau Admin");

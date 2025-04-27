@@ -12,9 +12,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Controleur permettant de gerer les commandes dans le systeme.
+ * Cette classe contient des methodes pour ajouter, supprimer, rechercher et recuperer les commandes, ainsi que pour gerer les articles.
+ */
 public class CommandeControleur {
     private GestionCommande gestionCommande;
 
+    /**
+     * Constructeur de la classe CommandeControleur.
+     * Initialise l'instance de GestionCommande pour la gestion des commandes.
+     */
     public CommandeControleur() {
         this.gestionCommande = new GestionCommande();
     }

@@ -10,6 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * FenetreAjouter est une classe permettant d'ajouter un nouvel article dans l'inventaire.
+ * L'utilisateur peut saisir les informations relatives à l'article (nom, marque, prix, etc.)
+ */
 public class FenetreAjouter extends JFrame {
     private int clientId;
     private ArticleControleur articleControleur;
@@ -17,6 +21,10 @@ public class FenetreAjouter extends JFrame {
     private DefaultTableModel tableModel;
     private JTextField searchField, nomField, marqueField, prixUnitaireField, prixVracField, quantiteVracField;
 
+    /**
+     * Constructeur de la fenetre d'ajout d'un article.
+     * @param clientId L'identifiant du client effectuant l'ajout.
+     */
     public FenetreAjouter(int clientId) {
         articleControleur = new ArticleControleur();
         setTitle("Ajouter un Article");

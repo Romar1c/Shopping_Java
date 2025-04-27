@@ -20,6 +20,13 @@ public class FenetreInventaire extends JFrame {
     private DefaultTableModel modelArticles;
     private JTable tableArticles;
 
+    /**
+     * Constructeur de la fenetre d'inventaire.
+     * Initialise les composants graphiques, affiche la liste des articles et configure les actions des boutons.
+     *
+     * @param clientId L'ID de l'admin qui consulte l'inventaire.
+     */
+
     public FenetreInventaire(int clientId) {
         this.clientId = clientId;
         this.commandeControleur = new CommandeControleur();
@@ -87,6 +94,9 @@ public class FenetreInventaire extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * ButtonRenderer est une classe qui permet de personnaliser l'apparence des boutons dans la table des articles.
+     */
     class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer() {
             setOpaque(true);
@@ -97,6 +107,9 @@ public class FenetreInventaire extends JFrame {
         }
     }
 
+    /**
+     * ButtonEditor est une classe qui permet de definir le comportement du bouton dans la table des articles.
+     */
     class ButtonEditor extends DefaultCellEditor {
         private JButton button;
         private String label;
