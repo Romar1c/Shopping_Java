@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="ProjetJava:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProjetJava_jar</output-path>
+    <root id="archive" name="ProjetJava.jar">
+      <element id="module-output" name="ProjetJava" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../../../../mysql-connector-j-9.2.0/mysql-connector-j-9.2.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librairie_externes/jcommon-1.0.23.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Librairie_externes/jfreechart-1.0.19.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
